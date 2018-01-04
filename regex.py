@@ -66,9 +66,70 @@ print(mo3.group())#Batmwowowoan
 
 '''
 #8.贪心和非贪心匹配
+'''
 greenHaRegex=re.compile(r'(Ha){3,5}')#默认贪心，匹配最长
 mo1=greenHaRegex.search('HaHaHaHaHa')
 print(mo1.group())
 nongreenHaRegex=re.compile(r'(Ha){3,5}?')#非贪心，匹配最短
 mo2=nongreenHaRegex.search('HaHaHaHaHa')
 print(mo2.group())
+'''
+#9.findall()方法
+#search返回第一次匹配的findall返回所有的匹配,是一个字符串列表
+'''
+phoneNumRegex=re.compile(r'\d\d\d-\d\d\d-\d\d\d\d')
+mo=phoneNumRegex.search('cell:415-555-9999,work:212-555-0000')
+print(mo.group())#415-555-9999
+print (phoneNumRegex.findall("cell:415-555-9999,work:212-555-0000"))#['415-555-999','212-555-0000']
+phoneNumRegex1=re.compile(r'(\d\d\d)-(\d\d\d)-(\d\d\d\d)')
+print (phoneNumRegex1.findall("cell:415-555-9999,work:212-555-0000"))#[('415','555','999'),('212','555','0000')]
+'''
+#10.字符分类
+'''
+\d:0~9的数字
+\D：除0~9以外的任何字符
+\w：任何字母，数字或下划线（匹配单词）
+\W：除字符，数字。和下划线以外的任何字符
+\s：空格，制表符，或者换行符（可以认为匹配空白字符）
+\S：除空格，制表符。换行符以外的任何字符
+'''
+#11.建立自己的字符分类】
+'''
+[aeiouAEIOU]匹配所有的元音字符
+[^AEIOUaeiou]匹配所有非元音字母
+[a-zA-Z0-9]匹配所有的大小写字符与数字
+
+'''
+#12.插入字符和美元字符
+'''
+开始处使用^字符表明匹配必须发生在备查找文本的开始处
+$表示必须以这个正则表达式模式结束
+'''
+beginWithHello=re.compile(r'^Hello')
+mo=beginWithHello.search('Hello word')
+print (mo.group())#Hello
+mo1=beginWithHello.search('he said Hello')
+print (mo1)
+
+endsWithNumber=re.compile(r'\d$')#以数字结束
+mo2=endsWithNumber.search('your number is 42')
+print(mo2.group())#2
+endsWithNumber=re.compile(r'\d+$')#以数字结束
+mo2=endsWithNumber.search('your number is 42')
+print(mo2.group())#42
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
