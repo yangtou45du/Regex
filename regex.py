@@ -105,6 +105,7 @@ print (phoneNumRegex1.findall("cell:415-555-9999,work:212-555-0000"))#[('415','5
 开始处使用^字符表明匹配必须发生在备查找文本的开始处
 $表示必须以这个正则表达式模式结束
 '''
+'''
 beginWithHello=re.compile(r'^Hello')
 mo=beginWithHello.search('Hello word')
 print (mo.group())#Hello
@@ -117,6 +118,45 @@ print(mo2.group())#2
 endsWithNumber=re.compile(r'\d+$')#以数字结束
 mo2=endsWithNumber.search('your number is 42')
 print(mo2.group())#42
+
+'''
+#13.通配字符（句点）匹配除了换行之外所有的字符,只匹配一个字符
+'''
+atRegex=re.compile(r'.at')
+mo=atRegex.findall('the cat in the hat sat on the flat mat at')
+print (mo)
+'''
+#14.点-星匹配所有字符
+'''
+nogreedyRegex=re.compile(r'<.*?>')#非贪心模式
+mo=nogreedyRegex.search('<to serve man> for dinner.>')
+print(mo.group())
+greedyRegex=re.compile(r'<.*>')#贪心模式
+mo1=greedyRegex.search('<to serve man> for dinner.>')
+print(mo1.group())
+'''
+#15.句点匹配换行，传入re.DOTALL
+'''
+noNewlineRegex=re.compile(r'.*')
+mo=noNewlineRegex.search('serve the public .\nprotect').group()
+print(mo)
+NewlineRegex=re.compile(r'.*',re.DOTALL)
+mo1=NewlineRegex.search('serve the public .\nprotect').group()
+print(mo1)
+'''
+#16.不区分大小写、re.I
+'''
+robocop=re.compile(r'robocop',re.I)
+mo=robocop.search('RoBocop').group()
+print(mo)
+'''
+#17.sub()替换字符串
+nameRegex=re.compile(r'Agent \w+')
+mo=nameRegex.sub('CENSON','Agent Alice GAVE')
+print(mo)
+
+
+
 
 
 
